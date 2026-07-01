@@ -27,23 +27,23 @@ Use the full report mode only when the user explicitly asks for a complete chart
 Do not use this skill for medical, legal, investment, or emergency decisions.
 
 ## Required Inputs
-Collect only what is missing:
+All four pillars and gender are required for a confident BaZi reading. Collect all of them before proceeding:
 
-- Birth date: `YYYY-MM-DD`. This is the minimum required input for any BaZi-based analysis.
-- Birth time: `HH:MM`, or a known two-hour time branch if exact time is unknown. If the user truly does not know the time, continue with an unknown-hour reading after clearly marking lower confidence and avoiding claims that depend on the hour pillar.
-- Calendar type: default to Gregorian unless the user says lunar calendar
-- Birthplace or longitude/timezone: recommended for solar-time confidence
-- Gender: required for precise luck-cycle direction and optional Zi Wei analysis. If missing, ask for it when timing is important; otherwise continue with limits.
+- Birth date: `YYYY-MM-DD`. Required — the year, month, and day pillars.
+- Birth time: `HH:MM`, or at minimum a known two-hour time branch (时辰). Required — the hour pillar completes the four pillars. Do not proceed without it.
+- Gender: `男` or `女`. Required — needed for luck-cycle direction (顺逆), day-master strength calibration, and spouse-star identification.
+- Calendar type: default to Gregorian (公历) unless the user says lunar calendar (农历).
+- Birthplace or longitude/timezone: strongly recommended for solar-time correction. Without it, hour-pillar confidence is reduced.
 - Current stuck point or uncertainty: highly recommended for the interview mode. Ask what decision, relationship, timing, or repeated pattern the user wants to resolve.
 - Focus area: optional, such as career, relationship, wealth, relocation, family, or next 3 years. If a current stuck point is available, use that instead of broad categories.
 
-If birthplace, longitude, gender, or reliable time is missing, continue only after clearly marking the confidence limits. Do not block the user unless birth date is missing.
+Do not proceed with a full reading if birth date, birth time, or gender is missing. Ask for them succinctly and wait.
 
 ## Workflow
-1. On activation, collect the minimum chart inputs before analysis. If the user only says "x-oracle" or asks for a reading without birth data, ask for birth date and birth time first; mention that unknown time is acceptable with lower confidence.
+1. On activation, collect all required inputs before analysis: birth date (YYYY-MM-DD), birth time (HH:MM or two-hour time branch), and gender (男/女). Do not proceed with a full reading until all three are provided.
 2. Identify the user's question mode: full baseline report, uncertainty interview, follow-up analysis, compatibility/relationship, annual timing, or symbolic add-on.
 3. Normalize the input. Confirm calendar type, timezone, birth time precision, and whether solar-time correction is possible.
-4. Run `scripts/calculate_core_chart.py` when birth date is available. Use its JSON as the source of truth. If birth time is unknown, run or reason with the available date-level chart only and explicitly exclude hour-pillar-dependent claims.
+4. Run `scripts/calculate_core_chart.py` when birth date, birth time, and gender are available. Use its JSON as the source of truth.
 5. If Zi Wei is requested and gender plus reliable birth time are available, run `scripts/calculate_ziwei.py`. If dependencies or required inputs are missing, skip it and explain briefly.
 6. For deep interpretation, read `reference-core.md`, `reference-classics.md`, and `reference-synthesis.md`.
 7. If the user has a current stuck point, classify it through BaZi first: wealth/resources, officer/killing/pressure, output/expression, resource/support, peer/autonomy, spouse palace/relationship, migration/external opportunity, or luck-cycle timing.
@@ -53,19 +53,20 @@ If birthplace, longitude, gender, or reliable time is missing, continue only aft
 11. End with a compact `chart_memory` block for future follow-up questions.
 
 ## Activation Intake
-If the user activates X-Oracle without enough information, ask concisely:
+If the user activates X-Oracle without enough information, ask concisely for all required fields:
 
 ```markdown
-可以。要先排八字，我需要这些最低信息：
+可以。要先排八字，我需要这些信息：
 
-1. 出生日期：YYYY-MM-DD
-2. 出生时间：HH:MM 或大概时辰；如果不知道也可以，我会按未知时柱低置信处理
-3. 公历/农历：不说默认公历
+1. 出生日期：YYYY-MM-DD（年月日）
+2. 出生时间：HH:MM（几点几分），或至少告诉我时辰（如子时、午时）
+3. 性别：男/女
+4. 公历/农历：不说默认公历
 
-更精准的话再补：出生地、性别、你现在最想解决的卡点。
+更精准的话再补：出生地（用于真太阳时校正）、你现在最想解决的卡点。
 ```
 
-Do not ask for every optional field at once if it makes the interaction feel heavy. Start with birth date/time, then collect birthplace, gender, and stuck point as needed.
+Ask for all four items in one message. Do not split across multiple turns.
 
 ## Uncertainty Interview Protocol
 Use this mode by default when the user has a concrete stuck point.
@@ -196,7 +197,7 @@ Always reuse the previous `chart_memory` if available.
 ## Boundaries
 - Do not make absolute claims such as guaranteed wealth, divorce, illness, disaster, or death.
 - Do not provide deterministic medical, legal, or investment advice.
-- Mark lower confidence when the birth time is near a time-branch boundary, solar-time correction is missing, or input is approximate.
+- Mark lower confidence when the birth time is near a time-branch boundary, solar-time correction is missing and longitude was not provided, or the hour pillar was given only as a two-hour branch rather than a precise time.
 - Every major claim should point back to at least one chart signal.
 - Do not turn uncertainty resolution into coercive decision-making. Explain what each option activates; do not command the user to choose.
 - Do not let Tarot override BaZi. Tarot may confirm, nuance, or question the current emotional script, but birth-chart and timing claims must remain BaZi-led.
