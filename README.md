@@ -4,6 +4,10 @@ An [Agent Skill](https://skills.sh) for BaZi-based uncertainty-resolution interv
 
 Supports: **Hermes Agent**, **Claude Code**, **Codex**, **Cursor**, and 60+ more via [`npx skills`](https://github.com/vercel-labs/skills).
 
+---
+
+**x-oracle** 是一个基于八字命理的 AI Agent 技能。它会根据你的出生年月日时和性别排四柱、定十神、看大运流年，然后**从你当下的卡点出发做聚焦访谈**——不是泛泛的人生报告，而是用命盘证据帮你理清不确定性的结构化对话。支持事业、感情、财运、时机判断等方向，可选叠加紫微斗数、周易、塔罗。
+
 ## What it does
 
 X-Oracle is not a generic destiny report generator. It's an **uncertainty-resolution interview** powered by BaZi (Four Pillars of Destiny / 八字):
@@ -56,7 +60,7 @@ The agent will ask for your birth date and time, then conduct a **focused interv
 
 - No absolute claims (guaranteed wealth, divorce, illness, disaster, death)
 - No deterministic medical, legal, or investment advice
-- Lower confidence marked when birth time is approximate or unknown
+- Lower confidence marked when birth time is near a time-branch boundary, or longitude is missing for solar-time correction
 - Tarot and I Ching are symbolic add-ons — BaZi remains the reasoning spine
 
 ## Scripts
